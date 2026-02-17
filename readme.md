@@ -1,5 +1,23 @@
 https://botfilter-h5ddh6dye8exb7ha.centralus-01.azurewebsites.net
 
+Como ejecutar la aplicacion
+1) Abrir un servidor estatico en esta carpeta (para evitar problemas de CORS).
+2) Abrir apply-jobs.html en el navegador.
+3) Ver los logs en la consola del navegador:
+  - candidate data (respuesta de Step 2)
+  - jobs list (respuesta de Step 3)
+  - apply-to-job response (respuesta del submit)
+
+Notas
+- Edita CANDIDATE_EMAIL en ApplyJobs.jsx para usar tu email.
+- La app usa React via CDN y Babel en el navegador (no requiere Vite/CRA).
+
+En que consiste
+Una pagina simple en React que:
+- Hace GET del candidato (Step 2) y la lista de posiciones (Step 3).
+- Muestra las posiciones con un input por item para la URL del repo.
+- Envia el POST a apply-to-job (Step 5) y maneja estados de carga y error.
+
 Pasos
 Step 1 — Crear el repositorio en GitHub
 Creá un repositorio público en GitHub. Hacé al menos un commit inicial y tené a mano la URL del repo (ej: https://github.com/tu-usuario/tu-repo). La vas a necesitar en el Step 5.
