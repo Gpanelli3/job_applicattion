@@ -44,7 +44,8 @@ function ApplyJobs() {
 
 	const uuid = candidate?.uuid || "";
 	const candidateId = candidate?.candidateId || "";
-	const isCandidateDataReady = Boolean(uuid && candidateId);
+	const applicationId = candidate?.applicationId || "";
+	const isCandidateDataReady = Boolean(uuid && candidateId && applicationId);
 
 	useEffect(() => {
 		const loadData = async () => {
@@ -84,7 +85,7 @@ function ApplyJobs() {
 		setSubmitOk(false);
 
 		if (!isCandidateDataReady) {
-			setSubmitError("Missing uuid or candidateId.");
+			setSubmitError("Missing uuid, candidateId, or applicationId.");
 			return;
 		}
 
@@ -97,6 +98,8 @@ function ApplyJobs() {
 		setSubmittingJobId(jobId);
 
 		try {
+			const payload = { uuid, jobId, candidateId, applicationId, repoUrl };
+			console.log("apply-to-job payload", payload);
 			const response = await fetch(
 				`${BASE_URL}/api/candidate/apply-to-job`,
 				{
@@ -104,12 +107,7 @@ function ApplyJobs() {
 					headers: {
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify({
-						uuid,
-						jobId,
-						candidateId,
-						repoUrl,
-					}),
+					body: JSON.stringify(payload),
 				}
 			);
 
